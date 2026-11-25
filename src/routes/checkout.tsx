@@ -26,6 +26,7 @@ function Checkout() {
   const shipping = shippingFor(subtotal);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [done, setDone] = useState(false);
+  const [pendingLink, setPendingLink] = useState<string | null>(null);
 
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,16 +37,29 @@ function Checkout() {
     const v = r.data;
     const items = lines.map((l) => `• ${l.product.name} × ${l.qty} = ${formatINR(l.qty * l.product.price)}`).join("\n");
     const msg = `New order (Cash on Delivery)\n\n${items}\n\nSubtotal: ${formatINR(subtotal)}\nShipping: ${shipping ? formatINR(shipping) : "Free"}\nTotal: ${formatINR(subtotal + shipping)}\n\nName: ${v.name}\nPhone: ${v.phone}\nEmail: ${v.email}\nAddress: ${v.address}, ${v.city}, ${v.state} - ${v.pincode}`;
-    window.open(whatsappLink(msg), "_blank");
-    clear(); setDone(true);
+    const link = whatsappLink(msg);
+    window.open(link, "_blank", "noopener,noreferrer");
+    setPendingLink(link);
   }
 
   if (done) return (
     <div className="container-page py-24 text-center">
       <p className="eyebrow">Thank you</p>
-      <h1 className="mt-2 text-4xl text-primary">Your order details were sent</h1>
-      <p className="mx-auto mt-4 max-w-md text-muted-foreground">Send the WhatsApp message that just opened — our team will confirm your Cash on Delivery order and delivery date there.</p>
+      <h1 className="mt-2 text-4xl text-primary">Order request received</h1>
+      <p className="mx-auto mt-4 max-w-md text-muted-foreground">Our team will reply on WhatsApp to confirm your Cash on Delivery order and delivery date there.</p>
       <Link to="/shop" className="mt-8 inline-block rounded-md bg-primary px-8 py-3 font-bold text-primary-foreground">Continue Shopping</Link>
+    </div>
+  );
+  if (pendingLink) return (
+    <div className="container-page py-24 text-center">
+      <p className="eyebrow">One more step</p>
+      <h1 className="mt-2 text-4xl text-primary">Send your order on WhatsApp</h1>
+      <p className="mx-auto mt-4 max-w-md text-muted-foreground">Your order is not placed yet. Press send on the WhatsApp message with your order details, then confirm below.</p>
+      <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <a href={pendingLink} target="_blank" rel="noopener noreferrer" className="rounded-md bg-whatsapp px-6 py-3 font-bold text-whatsapp-foreground">Open WhatsApp again</a>
+        <button onClick={() => { clear(); setPendingLink(null); setDone(true); }} className="rounded-md bg-primary px-6 py-3 font-bold text-primary-foreground">I've sent the message</button>
+        <button onClick={() => setPendingLink(null)} className="rounded-md border border-border px-6 py-3 font-semibold">Back to checkout</button>
+      </div>
     </div>
   );
   if (lines.length === 0) return (
