@@ -16,7 +16,7 @@ function Contact() {
     const d = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
     if (!d["name"]?.trim() || !d["message"]?.trim()) { setErr("Please add your name and message."); return; }
     setErr("");
-    window.open(whatsappLink(`Hi, I'm ${d["name"]}.\n${d["message"]}`), "_blank");
+    window.open(whatsappLink(`Hi, I'm ${d["name"]}.\n${d["message"]}`), "_blank", "noopener,noreferrer");
   }
   return (
     <>
@@ -25,7 +25,7 @@ function Contact() {
         <div className="space-y-5">
           <p className="flex gap-3"><MapPin className="h-5 w-5 text-accent" /> Jaipur, Rajasthan, India</p>
           <p className="flex gap-3"><Phone className="h-5 w-5 text-accent" /> <a href="tel:+918000780330">+91 80007 80330</a></p>
-          <a href={whatsappLink("Hello Bharat Furniture!")} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-whatsapp px-6 py-3 font-bold text-whatsapp-foreground"><MessageCircle className="h-5 w-5" /> Chat on WhatsApp</a>
+          <a href={whatsappLink("Hello Bharat Furniture!")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-whatsapp px-6 py-3 font-bold text-whatsapp-foreground"><MessageCircle className="h-5 w-5" /> Chat on WhatsApp</a>
         </div>
         <form onSubmit={submit} className="space-y-4 rounded-lg bg-secondary p-7">
           <input name="name" placeholder="Your name" className="w-full rounded-md border border-input bg-card px-3 py-2.5" />

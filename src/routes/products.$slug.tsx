@@ -69,7 +69,7 @@ function ProductPage() {
             <button onClick={() => { add(product.slug, qty); toast.success("Added to cart"); }} className="rounded-md border-2 border-primary py-3.5 font-bold text-primary hover:bg-secondary">Add to Cart</button>
             <button onClick={() => { add(product.slug, qty); navigate({ to: "/checkout" }); }} className="rounded-md bg-primary py-3.5 font-bold text-primary-foreground hover:opacity-90">Buy Now</button>
           </div>
-          <a href={whatsappLink(`Hello, I'm interested in "${product.name}" (${formatINR(product.price)}), quantity ${qty}. Please share more details.`)} target="_blank" rel="noreferrer" className="mt-3 flex items-center justify-center gap-2 rounded-md bg-whatsapp py-3.5 font-bold text-whatsapp-foreground hover:opacity-90">
+          <a href={whatsappLink(`Hello, I'm interested in "${product.name}" (${formatINR(product.price)}), quantity ${qty}. Please share more details.`)} target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center justify-center gap-2 rounded-md bg-whatsapp py-3.5 font-bold text-whatsapp-foreground hover:opacity-90">
             <MessageCircle className="h-5 w-5" /> Enquire on WhatsApp
           </a>
           <div className="mt-8 space-y-2 text-sm text-muted-foreground">
