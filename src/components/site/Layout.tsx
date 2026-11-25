@@ -16,7 +16,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
-      <div className="bg-primary py-2 text-center text-xs font-medium tracking-wide text-primary-foreground">Free delivery across India on orders above ₹2,999 · Cash on Delivery available</div>
+      <div className="bg-primary py-2 text-center text-xs font-medium tracking-wide text-primary-foreground">Free delivery above ₹2,999<span className="hidden sm:inline"> · Cash on Delivery available</span></div>
       <div className="container-page flex h-18 items-center justify-between gap-4 py-3">
         <Logo />
         <nav className="hidden items-center gap-8 md:flex">
