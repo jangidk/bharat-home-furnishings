@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Storefront catalog and cart live in src/lib/products.ts and src/lib/cart.tsx (localStorage) until Lovable Cloud is enabled; then move products/orders to the database.
+- Shared site chrome (header, footer, WhatsApp button) lives in src/components/site and is mounted in __root.tsx.
