@@ -14,7 +14,92 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          blurb: string
+          created_at: string
+          id: string
+          image: string
+          name: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          blurb?: string
+          created_at?: string
+          id?: string
+          image: string
+          name: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          blurb?: string
+          created_at?: string
+          id?: string
+          image?: string
+          name?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          dimensions: string
+          id: string
+          image: string
+          material: string
+          mrp: number
+          name: string
+          price: number
+          slug: string
+          sort_order: number
+          tags: string[]
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string
+          dimensions?: string
+          id?: string
+          image: string
+          material?: string
+          mrp: number
+          name: string
+          price: number
+          slug: string
+          sort_order?: number
+          tags?: string[]
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          dimensions?: string
+          id?: string
+          image?: string
+          material?: string
+          mrp?: number
+          name?: string
+          price?: number
+          slug?: string
+          sort_order?: number
+          tags?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_fkey"
+            columns: ["category"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,5 +1,20 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1795799471550,
+      "tag": "0000_create_storefront_catalog",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795799648968,
+      "tag": "0001_restrict_catalog_write_grants",
+      "breakpoints": true
+    }
+  ]
 }

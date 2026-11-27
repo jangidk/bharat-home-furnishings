@@ -32,3 +32,5 @@ use the editor.
 ## Project rules
 - Storefront catalog and cart live in src/lib/products.ts and src/lib/cart.tsx (localStorage) until Lovable Cloud is enabled; then move products/orders to the database.
 - Shared site chrome (header, footer, WhatsApp button) lives in src/components/site and is mounted in __root.tsx.
+- Shop reads the catalog through a public read-only server function and TanStack Query; existing home/product/cart catalog consumers remain unchanged in this phase to preserve scope.
+- Database image references use stable bundled filenames resolved in the catalog adapter (or HTTPS URLs), not hashed build URLs, so existing images survive deployments.
